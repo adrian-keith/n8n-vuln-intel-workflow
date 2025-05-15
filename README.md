@@ -11,21 +11,21 @@ The objective is to provide actionable intelligence for vulnerability management
 
 ## ✅ Project Structure and Detailed Notations
 
+```
 n8n-vuln-intel-workflow/
-│ README.md # Project overview, setup instructions, and workflow descriptions.
+│   README.md            # Project overview, setup instructions, and workflow descriptions.
 │
-├───config/ # Configuration files, environment variables, API keys.
-│ └── example.env # Template for environment variables (e.g., API keys, credentials).
+├───config/              # Configuration files, environment variables, API keys.
+│   └── example.env      # Template for environment variables (e.g., API keys, credentials).
 │
-├───docs/ # Documentation for workflows and configuration.
-│ └── setup.md # Detailed setup instructions with screenshots.
+├───docs/                # Documentation for workflows and configuration.
+│   └── setup.md         # Detailed setup instructions with screenshots.
 │
-├───scripts/ # Custom scripts for data processing, enrichment, etc.
-│ └── data_parser.js # Example script to parse and transform data.
+├───scripts/             # Custom scripts for data processing, enrichment, etc.
+│   └── data_parser.js   # Example script to parse and transform data.
 │
-└───workflows/ # Exported n8n workflows in JSON format.
-└── vuln_workflow.json
-
+└───workflows/           # Exported n8n workflows in JSON format.
+    └── vuln_workflow.json
 
 ---
 
