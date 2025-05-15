@@ -1,0 +1,54 @@
+{
+    "name": "Vulnerability Intelligence Workflow",
+    "version": 1,
+    "nodes": [
+        {
+            "id": "1",
+            "name": "Trigger - Daily Schedule",
+            "type": "n8n-nodes-base.scheduleTrigger",
+            "parameters": {
+                "cronExpression": "0 8 * * *"  // Runs daily at 8 AM
+            },
+            "notes": "This node triggers the workflow every day at 8 AM to fetch the latest cybersecurity news and vulnerability updates."
+        },
+        {
+            "id": "2",
+            "name": "Fetch Vulnerabilities",
+            "type": "n8n-nodes-base.httpRequest",
+            "parameters": {
+                "url": "https://vulnerability-feed-api.example.com/latest",
+                "method": "GET"
+            },
+            "notes": "Fetches the latest vulnerabilities from a specified API endpoint.",
+            "connections": {
+                "main": [
+                    {
+                        "node": "3",
+                        "type": "main"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "3",
+            "name": "Filter and Extract Data",
+            "type": "n8n-nodes-base.function",
+            "parameters": {
+                "functionCode": "// Extract relevant fields from the response\nconst items = [];\nconst data = items[0].json.data;\nfor (const item of data) {\n  items.push({ json: { title: item.title, description: item.description, date: item.date } });\n}\nreturn items;"
+            },
+            "notes": "Extracts and structures the data to only include title, description, and date."
+        },
+        {
+            "id": "4",
+            "name": "Send Email Report",
+            "type": "n8n-nodes-base.emailSend",
+            "parameters": {
+                "to": "you@example.com",
+                "subject": "Daily Vulnerability Report",
+                "text": "Here are today's top vulnerabilities:
+{{JSON.stringify($json)}}"
+            },
+            "notes": "Sends an email with the formatted vulnerability report."
+        }
+    ]
+}
